@@ -8,12 +8,14 @@ string LexString;
 %%
 #[^\n]*				{}
 
+^\.end				{yyterminate();}
+
 '					{BEGIN(lexstring); LexString=""; }
 <lexstring>'		{BEGIN(INITIAL); yylval.o = new Str(LexString); return STR;}
 <lexstring>\n		{LexString+=yytext[0];}
 <lexstring>.		{LexString+=yytext[0];}
 
-[a-zA-Z0-9_./]+		TOC(Sym,SYM)
+[a-zA-Z0-9_.]+		TOC(Sym,SYM)
 
 \(					TOC(Op,LP)
 \)					TOC(Op,RP)
@@ -30,6 +32,12 @@ string LexString;
 \_\>				TOC(Op,UG)
 \>\>				TOC(Op,GG)
 \<\<				TOC(Op,LL)
+
+\+					TOC(Op,ADD)
+\-					TOC(Op,SUB)
+\*					TOC(Op,MUL)
+\/					TOC(Op,DIV)
+\^					TOC(Op,POW)
 
 [ \t\r\n]+			{}
 %%

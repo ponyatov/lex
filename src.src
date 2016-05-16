@@ -2,9 +2,16 @@
 
 # C++ core source files
 
-pp = {X: '%spp.%spp' @ X }
+pp = {X: X+'pp1'+'.'+X+'pp2' } pp
 
-ypp = file @ pp@y
+pp@y
+
+.end
+
+ypp = file @ pp@y ypp
+
+.end
+
 lpp = file @ pp@l
 hpp = file @ pp@h
 cpp = file @ pp@c
@@ -26,7 +33,7 @@ skelex = [
 
 # generated files
 
-exe = file @ ./exe.exe
+exe = file @ './exe.exe'
 tabc = file @ ypp.tab.cpp		# parser.cpp
 tabh = file @ ypp.tab.hpp		# parser.hpp
 lexc = file @ lex.yy.c			# lexer.cpp
@@ -44,3 +51,10 @@ make << [
 
 .gitignore << [ exe log tabc tabh lexc ]
 
+# logo
+
+logo = 'logo64x64' logo
+ico = logo + '.ico' ico
+png = logo + '.png' png
+
+.end
