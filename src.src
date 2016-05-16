@@ -1,0 +1,44 @@
+# lexical sekeleton ( bI meta language )
+
+# C++ core source files
+
+ypp = file @ pp@y
+lpp = file @ pp@l
+hpp = file @ pp@h
+cpp = file @ pp@c
+make = file @ Makefile
+
+# source & log files
+
+src = file @ src.src
+log = file @ log.log
+
+.gitignore = file @ .gitignore
+
+# lexical sekeleton
+
+skelex = [
+	files = [ src log ypp lpp hpp cpp make ]
+	pl.pl .gitignore
+]
+
+# generated files
+
+exe = file @ exe.exe
+tabc = file @ ypp.tab.cpp		# parser.cpp
+tabh = file @ ypp.tab.hpp		# parser.hpp
+lexc = file @ lex.yy.c			# lexer.cpp
+
+# Makefile build script
+
+make << [ 
+	log : [ exe src ] -> exe << src >> log
+	C = [ cpp tabc lexc ]
+	H = [ hpp tabh ] 
+	exe : [ C H ] -> cxx @ cxxflags << C >> exe
+	tabc : ypp -> bison << ypp >> tabc
+	lexc : lpp -> flex << lpp >> lexc
+]
+
+.gitignore << [ exe log tabc tabh lexc ]
+
