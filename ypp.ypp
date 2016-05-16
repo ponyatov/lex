@@ -13,7 +13,10 @@
 %left EQ
 %right AT
 %%
-REPL : | REPL ex { cout << $2->dump(); } ;
+REPL : | REPL ex 		{ cout << $2->dump();
+						  cout << "\n----------------------------------";
+						  cout << $2->eval()->dump();
+						  cout << "\n==================================\n"; } ;
 scalar : SYM | NUM | STR ;
 ex : scalar
 	| LP ex RP			{ $$=$2; }

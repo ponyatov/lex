@@ -14,6 +14,9 @@ struct Sym {
 	map<string,Sym*> pars; void par(Sym*);
 	virtual string tagval(); string tagstr(); string pad(int);
 	virtual string dump(int=0);
+	virtual Sym* eval();
+//	virtual Sym* eq(Sym*);
+//	virtual Sym* at(Sym*);
 };
 extern map<string,Sym*> env;
 extern void env_init();

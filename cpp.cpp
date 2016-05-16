@@ -15,6 +15,13 @@ string Sym::dump(int depth) { string S = "\n"+pad(depth)+tagval();
 		S += (*it)->dump(depth+1);
 	return S; }
 
+Sym* Sym::eval() {
+	Sym *E = env[val]; if (E) return E; // lookup
+	for (auto it=nest.begin(),e=nest.end();it!=e;it++)
+		(*it) = (*it)->eval();
+	return this;
+}
+
 Str::Str(string V):Sym("str",V) {}
 string Str::tagval() { return tagstr(); }
 string Sym::tagstr() { return "'"+val+"'"; }
