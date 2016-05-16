@@ -1,0 +1,35 @@
+%{
+#include "hpp.hpp"
+%}
+%defines %union { Sym*o; }
+
+%token <o> SYM NUM STR			/* scalars: symbol number string */
+%token <o> LP RP LQ RQ LC RC	/* brackets: (ex) [li st] {la:mbda} */
+%token <o> EQ AT TILD COLON QQ	/* operators: = @ ~ : ? */
+%token <o> UG LL GG				/* _> << >> */
+
+%type <o> ex scalar list lambda
+
+%left EQ
+%right AT
+%%
+REPL : | REPL ex { cout << $2->dump(); } ;
+scalar : SYM | NUM | STR ;
+ex : scalar
+	| LP ex RP			{ $$=$2; }
+	| LQ list RQ		{ $$=$2; }
+	| LC lambda RC		{ $$=$2; }
+	| ex EQ ex			{ $$=$2; $$->push($1); $$->push($3); }
+	| ex AT ex			{ $$=$2; $$->push($1); $$->push($3); }
+	| ex LL ex			{ $$=$2; $$->push($1); $$->push($3); }
+	| ex GG ex			{ $$=$2; $$->push($1); $$->push($3); }
+	| ex COLON ex UG ex	{ $$=new Dep($1,$3,$5); }
+;
+list :					{ $$=new List(); }
+	| list ex			{ $$=$1; $$->push($2); }
+;
+lambda :				{ $$=new Lambda(); }
+	| lambda SYM COLON	{ $$=$1; $$->par($2); }
+	| lambda ex			{ $$=$1; $$->push($2); }
+;
+%%

@@ -2,6 +2,8 @@
 
 # C++ core source files
 
+pp = {X: '%spp.%spp' @ X }
+
 ypp = file @ pp@y
 lpp = file @ pp@l
 hpp = file @ pp@h
@@ -24,7 +26,7 @@ skelex = [
 
 # generated files
 
-exe = file @ exe.exe
+exe = file @ ./exe.exe
 tabc = file @ ypp.tab.cpp		# parser.cpp
 tabh = file @ ypp.tab.hpp		# parser.hpp
 lexc = file @ lex.yy.c			# lexer.cpp
@@ -32,12 +34,12 @@ lexc = file @ lex.yy.c			# lexer.cpp
 # Makefile build script
 
 make << [ 
-	log : [ exe src ] -> exe << src >> log
+	log : [ exe src ] _> exe << src >> log
 	C = [ cpp tabc lexc ]
 	H = [ hpp tabh ] 
-	exe : [ C H ] -> cxx @ cxxflags << C >> exe
-	tabc : ypp -> bison << ypp >> tabc
-	lexc : lpp -> flex << lpp >> lexc
+	exe : [ C H ] _> cxx @ cxxflags << C >> exe
+	tabc : ypp _> bison << ypp >> tabc
+	lexc : lpp _> flex << lpp >> lexc
 ]
 
 .gitignore << [ exe log tabc tabh lexc ]

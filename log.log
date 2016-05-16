@@ -1,0 +1,150 @@
+
+<op:=>
+	<:pp>
+	<^:^>
+		<op:@>
+			'%spp.%spp'
+			<:X>
+<op:=>
+	<:ypp>
+	<op:@>
+		<:file>
+		<op:@>
+			<:pp>
+			<:y>
+<op:=>
+	<:lpp>
+	<op:@>
+		<:file>
+		<op:@>
+			<:pp>
+			<:l>
+<op:=>
+	<:hpp>
+	<op:@>
+		<:file>
+		<op:@>
+			<:pp>
+			<:h>
+<op:=>
+	<:cpp>
+	<op:@>
+		<:file>
+		<op:@>
+			<:pp>
+			<:c>
+<op:=>
+	<:make>
+	<op:@>
+		<:file>
+		<:Makefile>
+<op:=>
+	<:src>
+	<op:@>
+		<:file>
+		<:src.src>
+<op:=>
+	<:log>
+	<op:@>
+		<:file>
+		<:log.log>
+<op:=>
+	<:.gitignore>
+	<op:@>
+		<:file>
+		<:.gitignore>
+<op:=>
+	<:skelex>
+	<[:]>
+		<op:=>
+			<:files>
+			<[:]>
+				<:src>
+				<:log>
+				<:ypp>
+				<:lpp>
+				<:hpp>
+				<:cpp>
+				<:make>
+		<:pl.pl>
+		<:.gitignore>
+<op:=>
+	<:exe>
+	<op:@>
+		<:file>
+		<:./exe.exe>
+<op:=>
+	<:tabc>
+	<op:@>
+		<:file>
+		<:ypp.tab.cpp>
+<op:=>
+	<:tabh>
+	<op:@>
+		<:file>
+		<:ypp.tab.hpp>
+<op:=>
+	<:lexc>
+	<op:@>
+		<:file>
+		<:lex.yy.c>
+<op:<<>
+	<:make>
+	<[:]>
+		<dep:>
+			<:log>
+			<[:]>
+				<:exe>
+				<:src>
+			<op:<<>
+				<:exe>
+				<op:>>>
+					<:src>
+					<:log>
+		<op:=>
+			<:C>
+			<[:]>
+				<:cpp>
+				<:tabc>
+				<:lexc>
+		<op:=>
+			<:H>
+			<[:]>
+				<:hpp>
+				<:tabh>
+		<dep:>
+			<:exe>
+			<[:]>
+				<:C>
+				<:H>
+			<op:@>
+				<:cxx>
+				<op:<<>
+					<:cxxflags>
+					<op:>>>
+						<:C>
+						<:exe>
+		<dep:>
+			<:tabc>
+			<:ypp>
+			<op:<<>
+				<:bison>
+				<op:>>>
+					<:ypp>
+					<:tabc>
+		<dep:>
+			<:lexc>
+			<:lpp>
+			<op:<<>
+				<:flex>
+				<op:>>>
+					<:lpp>
+					<:lexc>
+<op:<<>
+	<:.gitignore>
+	<[:]>
+		<:exe>
+		<:log>
+		<:tabc>
+		<:tabh>
+		<:lexc>
