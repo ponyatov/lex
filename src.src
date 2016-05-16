@@ -15,6 +15,8 @@ ypp = file @ pp@y ypp
 lpp = file @ pp@l
 hpp = file @ pp@h
 cpp = file @ pp@c
+os.hpp = file @ OS+'.hpp'
+os.cpp = file @ OS+'.cpp'
 make = file @ Makefile
 
 # source & log files
@@ -27,23 +29,23 @@ log = file @ log.log
 # lexical sekeleton
 
 skelex = [
-	files = [ src log ypp lpp hpp cpp make ]
+	files = [ src log ypp lpp hpp cpp os.hpp os.cpp make ]
 	pl.pl .gitignore
 ]
 
 # generated files
 
 exe = file @ './exe.exe'
-tabc = file @ ypp.tab.cpp		# parser.cpp
-tabh = file @ ypp.tab.hpp		# parser.hpp
-lexc = file @ lex.yy.c			# lexer.cpp
+parser.c = file @ ypp.tab.cpp
+parser.h = file @ ypp.tab.hpp
+lexer.c = file @ lex.yy.c
 
 # Makefile build script
 
 make << [ 
 	log : [ exe src ] _> exe << src >> log
-	C = [ cpp tabc lexc ]
-	H = [ hpp tabh ] 
+	C = [ core.cpp OS+'.cpp' parser.c lexer.c ]
+	H = [ core.hpp OS+'.hpp' parser.h ] 
 	exe : [ C H ] _> cxx @ cxxflags << C >> exe
 	tabc : ypp _> bison << ypp >> tabc
 	lexc : lpp _> flex << lpp >> lexc

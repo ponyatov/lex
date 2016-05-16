@@ -62,5 +62,7 @@ Error::Error(string V):Sym("error",V) { yyerror(val); }
 
 map<string,Sym*> env;
 void env_init() {
+	env["OS"] = new Str(OS);
+	env["MODULE"] = new Str(MODULE);
 	env["file"] = new Fn("file",File::file);
 }
