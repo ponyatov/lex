@@ -1,5 +1,5 @@
-# lex
-### lex skeleton: bI language core
+# lex skeleton
+### bI language core
 
 (c) Dmitry Ponyatov <dponyatov@gmail.com>
 
