@@ -1,5 +1,25 @@
 # lexical sekeleton ( bI meta language )
 
+TITLE = 'lexical skeleton: bI language core'
+
+# logo
+
+logo = 'logo64x64' logo
+ico = logo + '.ico' ico
+png = logo + '.png' png
+
+README = [
+	'# ![logo]('+png+') '+MODULE
+	'### '+TITLE
+	''
+	'(c) '+AUTHOR +' '+LICENSE
+	''
+	'github: '+GITHUB
+]/nl
+
+README
+.end
+
 # C++ core source files
 
 pp = {X: X+'pp1'+'.'+X+'pp2' } pp
@@ -28,7 +48,7 @@ log = file @ log.log
 
 # lexical sekeleton
 
-skelex = [
+skelex = [ README
 	files = [ src log ypp lpp hpp cpp os.hpp os.cpp make ]
 	pl.pl .gitignore
 ]
@@ -52,11 +72,5 @@ make << [
 ]
 
 .gitignore << [ exe log tabc tabh lexc ]
-
-# logo
-
-logo = 'logo64x64' logo
-ico = logo + '.ico' ico
-png = logo + '.png' png
 
 .end

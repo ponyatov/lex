@@ -31,7 +31,14 @@ Sym* Sym::add(Sym*o) { return new Error(tagval()+"+"+o->tagval()); }
 
 Str::Str(string V):Sym("str",V) {}
 string Str::tagval() { return tagstr(); }
-string Sym::tagstr() { return "<"+tag+":'"+val+"'>"; }
+string Sym::tagstr() { string S = "<"+tag+":'";
+	for (int i=0,e=val.size();i<e;i++)
+		switch (val[i]) {
+			case '\t': S += "\\t"; break;
+			case '\n': S += "\\n"; break;
+			default: S += val[i];
+		}
+	return S+"'>"; }
 Sym* Str::add(Sym*o) {
 	if (o->tag=="str") return new Str(val+o->val);
 	else return Sym::add(o); }
@@ -64,5 +71,10 @@ map<string,Sym*> env;
 void env_init() {
 	env["OS"] = new Str(OS);
 	env["MODULE"] = new Str(MODULE);
+	env["AUTHOR"] = new Str(AUTHOR);
+	env["GITHUB"] = new Str(GITHUB);
+	env["LICENSE"] = new Str(LICENSE);
 	env["file"] = new Fn("file",File::file);
+	env["nl"] = new Str("\n");
+	env["tab"] = new Str("\t");
 }

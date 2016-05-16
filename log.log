@@ -1,17 +1,91 @@
 
 <op:=>
-	<sym:pp>
-	<^:^>,X
-		<op:+>
+	<sym:TITLE>
+	<str:'lexical skeleton: bI language core'>
+----------------------------------
+<sym:TITLE>
+==================================
+
+<op:=>
+	<sym:logo>
+	<str:'logo64x64'>
+----------------------------------
+<sym:logo>
+==================================
+
+<sym:logo>
+----------------------------------
+<str:'logo64x64'>
+==================================
+
+<op:=>
+	<sym:ico>
+	<op:+>
+		<sym:logo>
+		<str:'.ico'>
+----------------------------------
+<sym:ico>
+==================================
+
+<sym:ico>
+----------------------------------
+<str:'logo64x64.ico'>
+==================================
+
+<op:=>
+	<sym:png>
+	<op:+>
+		<sym:logo>
+		<str:'.png'>
+----------------------------------
+<sym:png>
+==================================
+
+<sym:png>
+----------------------------------
+<str:'logo64x64.png'>
+==================================
+
+<op:=>
+	<sym:README>
+	<op:/>
+		<[:]>
 			<op:+>
 				<op:+>
 					<op:+>
-						<sym:X>
-						<str:'pp1'>
-					<str:'.'>
-				<sym:X>
-			<str:'pp2'>
+						<str:'# ![logo]('>
+						<sym:png>
+					<str:') '>
+				<sym:MODULE>
+			<op:+>
+				<str:'### '>
+				<sym:TITLE>
+			<str:''>
+			<op:+>
+				<op:+>
+					<op:+>
+						<str:'(c) '>
+						<sym:AUTHOR>
+					<str:' '>
+				<sym:LICENSE>
+			<str:''>
+			<op:+>
+				<str:'github: '>
+				<sym:GITHUB>
+		<sym:nl>
 ----------------------------------
+<sym:README>
+==================================
 
-5:<sym:X>+<str:'pp1'>[pp]
-
+<sym:README>
+----------------------------------
+<op:/>
+	<[:]>
+		<str:'# ![logo](logo64x64.png) lex'>
+		<str:'### lexical skeleton: bI language core'>
+		<str:''>
+		<str:'(c) Dmitry Ponyatov <dponyatov@gmail.com> GNU Lesser GPL'>
+		<str:''>
+		<str:'github: https://github.com/ponyatov/lex'>
+	<str:'\n'>
+==================================
